@@ -99,21 +99,21 @@ then we will use `ls` (short for **l**i**s**t) to see what is inside that direct
 >#Output:
 >
 >#$ pwd /c/Users/cassr/Documents
-
+>
 >
 >#Command 2:
 >ls 
 >
 >#Output: $ ls
-# 'CMOH Farm Routes'/  'My Games'/     'My Videos'@             btec_640/
-# GitHub/             'My Music'@     'Sarah P - Free Body'/   desktop.ini
-# Misc/               'My Pictures'@  'USF Masters Program'/   tps/
+># 'CMOH Farm Routes'/  'My Games'/     'My Videos'@             btec_640/
+># GitHub/             'My Music'@     'Sarah P - Free Body'/   desktop.ini
+># Misc/               'My Pictures'@  'USF Masters Program'/   tps/
 
 >
 >
->#-------------------------
->#Command 3: >ls -l
->
+``` #------------------------- 
+#Command 3: >ls -l
+
 ># Output: $ ls -1
 # 'CMOH Farm Routes'/
 # GitHub/
@@ -128,9 +128,9 @@ then we will use `ls` (short for **l**i**s**t) to see what is inside that direct
 # desktop.ini
 # tps/
 
->
->
->```
+
+
+```
 >
 >You have now learned the `pwd` and `ls` bash functions, you used `ls` followed by a flag `-l` which is called a flag or argument. These are prefixed with a hyphen (either - or --) and modify the preceding function, extending its functionality. Whereas a simple ls command lists the files within a directory, `-l` will display full details on every file contained in a directory.
 >
@@ -289,11 +289,6 @@ analysis/  final_output/  input_data/  src/
 
 cassr@LAPTOP-98I7NT89 MINGW64 ~/Documents/btec_640/transcriptomics_project
 $
-
-
-
-
-
 
 ```
 
