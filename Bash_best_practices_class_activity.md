@@ -225,8 +225,8 @@ class_excercises/
 > :open_file_folder:src <br>
 > <br>
 > :pencil:copy and paste here the command that you use, **Don't forget to use all the best practices for documentation that we saw in class**
-> ```
->cassr@LAPTOP-98I7NT89 MINGW64 ~/Documents/btec_640
+ ```
+cassr@LAPTOP-98I7NT89 MINGW64 ~/Documents/btec_640
 $ ls
 class_excercises/  genomics_project/  transcriptomics_project/
 
@@ -290,12 +290,12 @@ analysis/  final_output/  input_data/  src/
 cassr@LAPTOP-98I7NT89 MINGW64 ~/Documents/btec_640/transcriptomics_project
 $
 
->
->
->
->
->
->```
+
+
+
+
+
+```
 
 From now on we will do our work inside this project. Let's move into it so that our paths stay short and readable.
 
