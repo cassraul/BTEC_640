@@ -76,11 +76,15 @@ Paste your code below:
 #Paste here:
 
 
+cassr@LAPTOP-98I7NT89 MINGW64 ~/documents/btec_640/class_excercises
+$ mkdir bash_loops_09142026_class_excercise
 
+cassr@LAPTOP-98I7NT89 MINGW64 ~/documents/btec_640/class_excercises
+$ ls
+Bash_best_practices_class_activity.md  README  bash_loops_09142026_class_excercise/
 
-
-
-
+cassr@LAPTOP-98I7NT89 MINGW64 ~/documents/btec_640/class_excercises
+$
 
 
 ```
@@ -171,14 +175,13 @@ Forget about the command line, what is the logical workflow or syntax that you w
 ```
 Type your answer:
 
-Step 1:
+Step 1: Find the column that says which chromosome the gene is on
 
+Step 2: Ask the computer to sort out only the ones in that column labeled as protein coding
 
+Step 3: Ask the computer to delete/ignore all other columns except the column that says which chromosome and the gene name column
 
-
-
-
-
+Step 4: Ask the computer to print just those columns to make it easier to read
 
 ```
 
@@ -217,7 +220,7 @@ grep -c "chr21" hg38.ncbiRefSeq.gtf
 >❓ **Question**: What is the total line count for a GTF file filtered for chr21?</b>
 ```
 Type your answer:
-
+52,14 genes filtered for chr21
 
 ```
 
@@ -234,7 +237,7 @@ grep "chr21" hg38.ncbiRefSeq.gtf > chr21.gtf
 ```
 Type your answer:
 
-
+You may end up saving a file with just the number of counted genes (52142) instead of the data from your input
 
 
 
@@ -246,7 +249,9 @@ Type your answer:
 ```
 Type your answer:
 
+You can find the gene name (gene id) in column 9
 
+You can find the accession number (exon ID) in column 9
 
 
 ```
@@ -345,9 +350,7 @@ gene_id "LSS"; transcript_id "NM_001145436.2"; exon_number "17"; exon_id "NM_001
 ```
 Type your answer:
 
-
-
-
+Since awk reads text one line at a time to apply your condition, I think you should should as it to first scan for the gene name and print those. Then, ask it to scan for the accession number and print that after in a new column.
 
 ```
 
