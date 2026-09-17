@@ -1,4 +1,201 @@
 ```
+Bash Class: Loops & Conditionals with Real Genomic Data (Human Chromosome 21)
+Today we're going to practice more basic shell commands. To do this, we'll start working with real biological data, so you can begin getting familiar with manipulating and understanding biological data.
+
+:rotating_light: Remember to document each step in a separate script document, following the best practices we covered last class.
+
+Chromosome 21
+We're going to work with human Chromosome 21. It's the smallest human autosome, and it was the second chromosome to be fully sequenced in the Human Genome Project. It has approximately 215–234 protein-coding genes.
+
+It's of significant medical importance due to its link to Down syndrome (trisomy 21). It houses critical loci like the APP gene, whose extra copy directly connects trisomy 21 to early-onset Alzheimer's disease, alongside genes like SOD1, which regulates oxidative stress and cellular aging.
+
+Activity goals:
+
+Practice creating and moving around directories.
+Download data from NCBI
+Practice file manipulation
+Learn basic shell commands for data manipulation.
+Understand loops and conditionals.
+Understand the structure of a GTF file.
+Get familiar with fasta files.
+Practice script documentaton. Last class we discussed that a proper managment of biological databases should follow the FAIR principles, and it needs to be Findable and Accesible. Repositories like Ensembl, the UCSC database, and NCBI are one of the major public repositories commonly used.
+One of the most common files that you will be using when working with biological data, is the annotation file. It is usually represented in a 9-column format file GFF or GTF containing information about every gene, transcript, isoforms, psedugenes, variants, non-coding regions, etc. together with metadata such as their accession number.
+
+This is from ensembl description:
+
+"Fields must be tab-separated. Also, all but the final field in each feature line must contain a value; "empty" columns should be denoted with a '.' *
+
+seqname - name of the chromosome or scaffold; chromosome names can be given with or without the 'chr' prefix. Important note: the seqname must be one used within Ensembl, i.e. a standard chromosome name or an Ensembl identifier such as a scaffold ID, without any additional content such as species or assembly. See the example GFF output below.
+source - name of the program that generated this feature, or the data source (database or project name)
+feature - feature type name, e.g. Gene, Variation, Similarity
+start - Start position of the feature, with sequence numbering starting at 1.
+end - End position of the feature, with sequence numbering starting at 1.
+score - A floating point value.
+strand - defined as + (forward) or - (reverse).
+frame - One of '0', '1' or '2'. '0' indicates that the first base of the feature is the first base of a codon, '1' that the second base is the first base of a codon, and so on..
+attribute - A semicolon-separated list of tag-value pairs, providing additional information about each feature.
+The annotation file usually contains only information about specific features of gene, not the fasta sequence.
+
+For todays class exercise, we will:
+
+Download the human genome annotation (gtf file, the whole genome, all chromosomes).
+Extract only the information for chromosome 21.
+Extract the gene names and accession numbers on chromosome 21.
+Randomly select 20 genes and download their actual sequences from NCBI, in a single loop.
+Create and document your script.
+
+[!TIP] I added the basic syntax for the commands that we are using today so it is easier for you to revisit and to create your own dictionary. Even if the dictionary does not count for your final grade, I will considered it for an extra point at the end of the semester.
+
+1. Create your working directory
+Last class we created our main btec_640 working directory.
+
+:point_right: Open your terminal, make sure is in bash
+
+:point_right: Go to your /btec_640/class_excercises directory that you created last class.
+
+:point_right: Create a new directory for todays class (named it following best practices)
+
+Paste your code below:
+
+#Paste here:
+
+
+cassr@LAPTOP-98I7NT89 MINGW64 ~/documents/btec_640/class_excercises
+$ mkdir bash_loops_09142026_class_excercise
+
+cassr@LAPTOP-98I7NT89 MINGW64 ~/documents/btec_640/class_excercises
+$ ls
+Bash_best_practices_class_activity.md  README  bash_loops_09142026_class_excercise/
+
+cassr@LAPTOP-98I7NT89 MINGW64 ~/documents/btec_640/class_excercises
+$
+
+
+
+2. Download the chr21 annotation file
+To download a file from the web we can use wget or curl. Today we will be using curl.
+
+[!TIP] Syntax: curl
+
+curl -o OUTPUT_FILENAME "URL"
+
+curl fetches whatever is at a URL.
+-o tells it to save what it fetches into a file, instead of just printing it to your screen. Always follow -o with the filename you want.
+The URL goes in quotes so the shell doesn't get confused by special characters inside it.
+Check that you are inside the working directory for today's activity pwd
+We are going to downlaod the human genome annotation. This will be your input data. Create the input_data directory and move to that directory.
+Once inside your "input_data" directory copy and paste this command:
+curl -o hg38.ncbiRefSeq.gtf.gz "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/genes/hg38.ncbiRefSeq.gtf.gz"
+
+This is the whole human genome's annotation but we just need chromosome 21. Try to open the file with less
+
+[!TIP]Syntax: less
+
+less FILENAME
+
+Code:
+
+less hg38.ncbiRefSeq.gtf.gz
+
+Well, it seems that we need to unzip it, for this we will use gunzip
+
+[!TIP]Syntax: gunzip
+
+gunzip FILENAME.gz
+
+.gz is the gzip compression format. .zip is a different format — unzip will not work on a .gz file, and will error out. The file extension tells you which decompression tool to use.
+gunzip replaces the .gz file with the uncompressed version, same name minus .gz.
+Code:
+
+gunzip hg38.ncbiRefSeq.gtf.gz
+
+let's open it again (NOTICE THAT THE FILENAME CHANGED):
+
+space = page down, q = quit.
+While scrolling, identify each of the 9 GTF columns.
+
+Now try head and tail commands on the same file, see what happens?
+
+Lets create our analysis directory. Go back to your workdir and create the analysis directory.
+
+Do a soft link of the unzipped file:
+
+
+ln -s ../input_data/hg38.ncbiRefSeq.gtf
+
+
+
+3. Extract the names and accession numbers from all the protein-coding genes of chromosome 21 in humans
+:question: We just need the protein-coding genes from chromosome 21. Forget about the command line, what is the logical workflow or syntax that you would use to extract only the information for chromosome 21?
+
+Type your answer:
+
+Step 1: Find the column that says which chromosome the gene is on
+
+Step 2: Ask the computer to sort out only the ones in that column labeled as protein coding
+
+Step 3: Ask the computer to delete/ignore all other columns except the column that says which chromosome and the gene name column
+
+Step 4: Ask the computer to print just those columns to make it easier to read
+
+
+There are many ways to do this, this example is just one of them. I encourage you to explore your own solution if your reasoning was different from the one we are going to work today:
+
+The workflow would be:
+
+3a. Extract all lines that contains chr21
+But how do we know this information? Is it actually there? For this we use one of the most common commands in shell: grep. The grep (Global Regular Expression Print) command is use to search for specific words, phrases.
+
+[!TIP]Syntax: grep
+
+grep -FLAG "PATTERN" FILENAME
+
+Flags are optional, you will get familiar with them the more you practice.
+Let's see if chr21 is present in our file, and how many lines are in from chr21 only in the GTF file?
+
+Code
+
+grep "chr21" hg38.ncbiRefSeq.gtf
+
+
+It is impossible to count right? Let's try with the "count" flag.
+
+grep -c "chr21" hg38.ncbiRefSeq.gtf
+
+
+❓ Question: What is the total line count for a GTF file filtered for chr21?
+
+Type your answer:
+52,14 genes filtered for chr21
+
+
+Ok, chr21 is there, let's print again all the chr21 but now we are going to save it in a new file named: chr21.gtf. After doing this explore your file.
+
+grep "chr21" hg38.ncbiRefSeq.gtf > chr21.gtf
+
+
+:question: What would happen if you keep the grep -c flag and save it as chr21.gtf?
+
+Type your answer:
+
+You may end up saving a file with just the number of counted genes (52142) instead of the data from your input
+
+
+
+
+3b. Extract only the gene name and accession numbers for protein-coding genes.
+:question: Let's get familiar with our GTF file, in which column is this information?
+
+Type your answer:
+
+You can find the gene name (gene id) in column 9
+
+You can find the accession number (exon ID) in column 9
+
+
+
+We want to keep only protein-coding genes. This is why is so important the NCBI acceession number.
+
 ## Below is all genes on human chromosome 21; some were removed to increase brevity of this example
 
 chr21   ncbiRefSeq.2022-10-28   transcript      5022531 5036771 .       +       .       gene_id "LOC102723996"; transcript_id "NM_001363770.2";  gene_name "LOC102723996";
@@ -249,7 +446,7 @@ cassr@LAPTOP-98I7NT89 MINGW64 ~/documents/btec_640/class_excercises/bash_loops_0
 $ wc -l chr21.gtf
 52142 chr21.gtf
 
-## Above the "wc" script llows for you to find the word count in a specific file. "-l" (l as in line) tells the computer to count those words as the whole line
+## Above the "wc" script allows for you to find the word count in a specific file. "-l" (l as in line) tells the computer to count those words as the whole line
 ## Therefore, this script is asking the computer to count the lines in a speciifc file, which we see matched the instances of "chr21" from the original file
 
 cassr@LAPTOP-98I7NT89 MINGW64 ~/documents/btec_640/class_excercises/bash_loops_09142026_class_excercise/analysis
