@@ -4,7 +4,7 @@
 # Sep 16, 2026 Ver. 1
 # To run this script, save it as bash_loops_class_excercise_canvas.sh and execute it in your terminal. You will need to have internet access to download the necessary files.
 
-cd documents/
+cd Documents/
 # This will change the current directory to the documents folder. Make sure you have a documents folder in your home directory.
 
 cd btec_640/
