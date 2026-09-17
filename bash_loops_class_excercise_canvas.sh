@@ -4,22 +4,26 @@
 # Sep 16, 2026 Ver. 1
 # To run this script, save it as bash_loops_class_excercise_canvas.sh and execute it in your terminal. You will need to have internet access to download the necessary files.
 
-cd Documents/
-# This will change the current directory to the documents folder. Make sure you have a documents folder in your home directory.
 
-cd btec_640/
+mkdir -p btec_640
+# This command creates a new directory called btec_640 in your current working directory. You can change the name of the directory if you prefer a different name.
+
+cd btec_640//
 # This will change the current directory to the btec_640 folder. Make sure you have a btec_640 folder in your documents directory.
+
+mkdir -p class_excercises
+# This command creates a new directory called class_excercises inside the btec_640 directory. This is where we will store all the files related to this exercise.
 
 cd class_excercises
 # This will change the current directory to the class_excercises folder. Make sure you have a class_excercises folder in your btec_640 directory.
 
-mkdir bash_loops_09142026_class_excercise
+mkdir -p bash_loops_09142026_class_excercise
 # This command creates a new directory called bash_loops_09142026_class_excercise. This is where we will store all the files related to this exercise.
 
 cd bash_loops_09142026_class_excercise/
 # This command changes the current directory to the newly created bash_loops_09142026_class_excercise directory.
 
-mkdir input_data
+mkdir -p input_data
 # This command creates a new directory called input_data. This is where we will download the necessary input files for this exercise.
 
 cd input_data/
@@ -40,7 +44,7 @@ less hg38.ncbiRefSeq.gtf
 cd ../
 # This command changes the current directory back to the bash_loops_09142026_class_excercise directory.
 
-mkdir analysis
+mkdir -p analysis
 # This command creates a new directory called analysis. This is where we will perform our data analysis.
 
 cd analysis/
